@@ -40,4 +40,8 @@ export class UserService {
         async getAll() {
                 return this.prisma.prismaClient.user.findMany();
         }
+
+        async logout() {
+                return 'Logout';
+        }
 }

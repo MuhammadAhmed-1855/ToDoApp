@@ -19,4 +19,6 @@ export class UserController {
         login(@Body() data: any) {
                 return this.userService.login(data);
         }
+
+        
 }
