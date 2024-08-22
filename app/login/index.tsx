@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'expo-router';
 import { Text, SafeAreaView, View, StyleSheet, TextInput, Button } from 'react-native';
+import loginAPI from '../api/login';
 
 const LoginPage = () => {
 
@@ -8,7 +9,7 @@ const LoginPage = () => {
         const [password, setPassword] = useState('');
 
         const handleLogin = () => {
-                console.log('Login');
+                loginAPI(email, password);
         }
 
 
@@ -28,6 +29,8 @@ const LoginPage = () => {
 
                                 <TextInput
                                         placeholder="Email"
+                                        value={email}
+                                        onChangeText={(text) => setEmail(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -39,6 +42,8 @@ const LoginPage = () => {
 
                                 <TextInput
                                         placeholder="Password"
+                                        value={password}
+                                        onChangeText={(text) => setPassword(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -50,7 +55,7 @@ const LoginPage = () => {
 
                                 <Button
                                         title="Sign In"
-                                        onPress={() => console.log('Login')}
+                                        onPress={() => handleLogin()}
                                 />
 
                                 

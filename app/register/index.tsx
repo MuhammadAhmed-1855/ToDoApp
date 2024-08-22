@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'expo-router';
 import { Text, SafeAreaView, View, StyleSheet, TextInput, Button } from 'react-native';
+import registerAPI from '../api/register';
 
 const RegisterPage = () => {
 
@@ -10,7 +11,7 @@ const RegisterPage = () => {
         const [password, setPassword] = useState('');
 
         const handleRegister = () => {
-                console.log('Register');
+                registerAPI(name, username, email, password);
         }
 
         return (
@@ -29,6 +30,8 @@ const RegisterPage = () => {
 
                                 <TextInput
                                         placeholder="Name"
+                                        value={name}
+                                        onChangeText={(text) => setName(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -40,6 +43,8 @@ const RegisterPage = () => {
 
                                 <TextInput
                                         placeholder="Username"
+                                        value={username}
+                                        onChangeText={(text) => setUsername(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -51,6 +56,8 @@ const RegisterPage = () => {
 
                                 <TextInput
                                         placeholder="Email"
+                                        value={email}
+                                        onChangeText={(text) => setEmail(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -62,6 +69,8 @@ const RegisterPage = () => {
 
                                 <TextInput
                                         placeholder="Password"
+                                        value={password}
+                                        onChangeText={(text) => setPassword(text)}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -73,7 +82,7 @@ const RegisterPage = () => {
 
                                 <Button
                                         title="Sign Up"
-                                        onPress={() => console.log('Login')}
+                                        onPress={() => handleRegister()}
                                 />
 
                                 
