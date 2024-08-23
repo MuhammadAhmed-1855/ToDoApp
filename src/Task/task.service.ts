@@ -30,10 +30,11 @@ export class TaskService {
 
         async update(data: any, req: any) {
                 const user_id = req.user.sub;
-                const { name, ...rest } = data;
+                console.log("Data: ", data);
+                const { id, ...rest } = data;
                 return this.prisma.prismaClient.task.update({
                         where: {
-                                name: name,
+                                id: id,
                                 userId: user_id,
                         },
                         data: {
