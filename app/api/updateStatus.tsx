@@ -4,13 +4,6 @@ const updateStatus = async (taskId: number, name: string, description: string, s
         try {
                 const token = await AsyncStorage.getItem('token');
 
-                console.log(token);
-                console.group(taskId);
-                console.log(name);
-                console.log(description);
-                console.log(status);
-                console.log(userId);
-
                 const response = await fetch(`http://192.168.20.105:3000/task/update`, {
                         method: 'POST',
                         headers: {

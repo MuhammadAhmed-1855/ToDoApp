@@ -1,8 +1,9 @@
-import { SafeAreaView, View, Text, VirtualizedList, StyleSheet, Pressable } from 'react-native'
+import { SafeAreaView, View, Text, VirtualizedList, StyleSheet, Pressable, Button } from 'react-native'
 import { useState, useEffect } from 'react'
 import fetchTasksAPI from '../api/fetchTasks'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import updateStatusAPI from '../api/updateStatus';
+import AddTask from '../components/addTask';
 
 type Task = {
         id: number
@@ -12,9 +13,10 @@ type Task = {
         userId: number
 }
 
-const index = () => {
+const TasksPage = () => {
 
         const [taskList, setTaskList] = useState<Task[]>([]);
+        const [modal, setModal] = useState(false);
 
         const fetchData = async () => {
                 try {
@@ -29,14 +31,22 @@ const index = () => {
 
         const handlePress = async (taskId: number, name: string, description: string, status: string, userId: number) => {
                 try {
-                        console.log("Aliens are coming");
+                        alert('Task status will be updated');
                         const updatedTask = await updateStatusAPI(taskId, name, description, status, userId);
-                        console.log(updatedTask);
+                        // console.log(updatedTask);
                         fetchData();
                 }
                 catch (error) {
                         console.log(error);
                 }
+        }
+
+        const onTaskAdded = () => {
+                fetchData(); // Refresh the task list when a task is added
+        };
+
+        const addTask = () => {
+                setModal(true);
         }
 
         useEffect(() => {
@@ -71,12 +81,23 @@ const index = () => {
                                         getItemCount={() => taskList.length}
                                         getItem={(data, index) => data[index]}
                                 />
+
+                                <Button
+                                        title="Add Task"
+                                        onPress={() => addTask()}
+                                />
+
+                                <AddTask
+                                        modalVisible={modal}
+                                        setModalVisible={setModal}
+                                        onTaskAdded={onTaskAdded}
+                                />
                         </View>
                 </SafeAreaView>
         )
 }
 
-export default index
+export default TasksPage
 
 const styles = StyleSheet.create({
         container: {

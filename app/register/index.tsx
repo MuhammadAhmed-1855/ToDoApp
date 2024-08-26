@@ -11,7 +11,25 @@ const RegisterPage = () => {
         const [password, setPassword] = useState('');
 
         const handleRegister = () => {
-                registerAPI(name, username, email, password);
+
+                if (!name.trim() && !username.trim() && !email.trim() && !password.trim()) {
+                        alert('Please enter all fields');
+                }
+                else if (!name.trim()) {
+                        alert('Please enter name');
+                }
+                else if (!username.trim()) {
+                        alert('Please enter username');
+                }
+                else if (!email.trim()) {
+                        alert('Please enter email');
+                }
+                else if (!password.trim()) {
+                        alert('Please enter password');
+                }
+                else {
+                        registerAPI(name, username, email, password);
+                }
         }
 
         return (
@@ -58,6 +76,7 @@ const RegisterPage = () => {
                                         placeholder="Email"
                                         value={email}
                                         onChangeText={(text) => setEmail(text)}
+                                        inputMode="email"
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -71,6 +90,7 @@ const RegisterPage = () => {
                                         placeholder="Password"
                                         value={password}
                                         onChangeText={(text) => setPassword(text)}
+                                        secureTextEntry={true}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',

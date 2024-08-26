@@ -9,9 +9,20 @@ const LoginPage = () => {
         const [password, setPassword] = useState('');
 
         const handleLogin = () => {
-                loginAPI(email, password);
+                
+                if (!email.trim() && !password.trim()) {
+                        alert('Please enter email and password');
+                }
+                else if (!email.trim()) {
+                        alert('Please enter email');
+                }
+                else if (!password.trim()) {
+                        alert('Please enter password');
+                }
+                else {
+                        loginAPI(email, password);
+                }
         }
-
 
         return (
                 <SafeAreaView style={styles.container}>
@@ -31,6 +42,7 @@ const LoginPage = () => {
                                         placeholder="Email"
                                         value={email}
                                         onChangeText={(text) => setEmail(text)}
+                                        inputMode='email'
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
@@ -44,6 +56,7 @@ const LoginPage = () => {
                                         placeholder="Password"
                                         value={password}
                                         onChangeText={(text) => setPassword(text)}
+                                        secureTextEntry={true}
                                         style={{
                                                 height: 40,
                                                 borderColor: 'gray',
